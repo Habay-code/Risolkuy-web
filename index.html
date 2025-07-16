@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RisolKuy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&family=Playfair+Display&display=swap" rel="stylesheet"/>
+ 
+
+  <style>
+    body {
+      font-family: 'Rubik', sans-serif;
+      margin: 0;
+      background: url('https://i.imgur.com/zLij3Ke.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+
+    header {
+      background: #ffe08a;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin: 0;
+    }
+    .logo {
+      display: block;
+     margin: 0 auto 10px;
+     height: 80px;
+     object-fit: contain;
+    }
+    section.menu {
+  position: relative;
+  background: url('https://i.imgur.com/zLij3Ke.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px 20px;
+  z-index: 0;
+}
+
+section.menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.3); /* Semakin kecil, semakin transparan */
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  z-index: -1;
+}
+
+    .item {
+      width: 200px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+    }
+    .item img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .qty {
+      margin: 10px 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .qty button {
+      padding: 5px 10px;
+      font-size: 1rem;
+      background: #ffc300;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .qty span {
+      min-width: 20px;
+      display: inline-block;
+      text-align: center;
+    }
+    .form {
+      padding: 30px 20px;
+      background: #fffef3;
+      text-align: center;
+    }
+    .form input {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .form button {
+      background: #f39c12;
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+section#struk {
+  position: relative;
+  background: url('https://i.imgur.com/zLij3Ke.png') no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 40px 20px;
+  display: none;
+  z-index: 0;
+}
+section#struk::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.88); /* lapisan putih agar teks tetap jelas */
+  z-index: -1;
+}
+#struk .box {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1;
+}
+footer {
+  background: #ffe08a;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+    .risol-hujan img {
+  position: fixed;
+  top: -100px;
+  width: 35px;
+  z-index: 1;
+  animation: jatuh 6s linear infinite;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+@keyframes jatuh {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://i.imgur.com/rrV4KdC.jpeg" class="logo" alt="Logo RisolKuy"/>
+    <h1>RisolKuy</h1>
+    <p>Risol rumahan, rasa restoran.</p>
+  </header>
+   <div class="risol-hujan"></div>
+
+  <section class="menu" id="menu">
+    <div class="item" data-name="Risol Ayam" data-price="13000">
+      <img src="https://cdn0-production-images-kly.akamaized.net/vZepg8vY-xUZJczp3xA7mg5eVcU=/0x41:999x604/1200x675/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/4030583/original/097348400_1653280735-shutterstock_1873057813.jpg" alt="Risol Ayam">
+      <h3>Risol Ayam</h3>
+      <p>Rp 13.000</p>
+      <div class="qty">
+        <button onclick="updateQty(this, -1)">−</button>
+        <span>0</span>
+        <button onclick="updateQty(this, 1)">+</button>
+      </div>
+    </div>
+    <div class="item" data-name="Risol Mayo" data-price="15000">
+      <img src="https://img-global.cpcdn.com/recipes/b667b055beb49bfd/680x482cq90/risol-mayo-sosis-telur-foto-resep-utama.jpg" alt="Risol Mayo">
+      <h3>Risol Mayo</h3>
+      <p>Rp 15.000</p>
+      <div class="qty">
+        <button onclick="updateQty(this, -1)">−</button>
+        <span>0</span>
+        <button onclick="updateQty(this, 1)">+</button>
+      </div>
+    </div>
+    <div class="item" data-name="Risol Sayur" data-price="10000">
+      <img src="https://down-id.img.susercontent.com/file/id-11134207-7r98w-lq4ncixtby4fee" alt="Risol Sayur">
+      <h3>Risol Sayur</h3>
+      <p>Rp 10.000</p>
+      <div class="qty">
+        <button onclick="updateQty(this, -1)">−</button>
+        <span>0</span>
+        <button onclick="updateQty(this, 1)">+</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="form">
+    <h2>Pesanan</h2>
+    <input type="text" id="nama" placeholder="Nama Pembeli">
+    <input type="text" id="alamat" placeholder="Alamat Pembeli">
+    <p><strong>Total:</strong> <span id="total">Rp 0</span></p>
+    <button onclick="pesan()">Pesan Sekarang</button>
+  </section>
+
+  <section id="struk">
+    <div class="box">
+      <h3>Struk Pesanan</h3>
+      <div id="isiStruk"></div>
+      <hr style="margin: 20px 0;">
+      <p><small><i>Riwayat pesanan tersimpan di perangkat ini (localStorage).</i></small></p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 RisolKuy. Semua hak dilindungi.
+  </footer>
+
+  <script>
+    function updateQty(btn, val) {
+      const span = btn.parentElement.querySelector('span');
+      let qty = parseInt(span.innerText);
+      qty = Math.max(0, qty + val);
+      span.innerText = qty;
+      updateTotal();
+    }
+
+    function updateTotal() {
+      let total = 0;
+      document.querySelectorAll('.item').forEach(item => {
+        const price = parseInt(item.dataset.price);
+        const qty = parseInt(item.querySelector('span').innerText);
+        total += price * qty;
+      });
+      document.getElementById('total').innerText = 'Rp ' + total.toLocaleString();
+    }
+
+    let adaPesanan = false;
+    function pesan() {
+      const nama = document.getElementById('nama').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+      if (!nama || !alamat) {
+        alert("Nama dan alamat wajib diisi.");
+        return;
+      }
+
+      let strukHTML = `
+  <p><strong>Nama:</strong> ${nama}</p>
+  <p><strong>Alamat:</strong> ${alamat}</p>
+  <p><strong>Rincian Pesanan:</strong></p>
+  <table style="width:100%; text-align:left; border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Menu</th>
+        <th>Qty</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+`;
+
+let total = 0;
+document.querySelectorAll('.item').forEach(item => {
+  const name = item.dataset.name;
+  const price = parseInt(item.dataset.price);
+  const qty = parseInt(item.querySelector('span').innerText);
+
+  if (qty > 0) {
+    adaPesanan = true;
+    const subtotal = price * qty;
+    total += subtotal;
+    strukHTML += `
+      <tr>
+        <td>${name}</td>
+        <td>${qty}</td>
+        <td>Rp ${subtotal.toLocaleString()}</td>
+      </tr>
+    `;
+  }
+});
+
+// Cek jika tidak ada pesanan
+if (!adaPesanan) {
+  alert("Kamu tidak memesan apa pun.");
+  return;
+}
+
+strukHTML += `
+    </tbody>
+  </table>
+  <p><strong>Total:</strong> Rp ${total.toLocaleString()}</p>
+  <div style="text-align:center; margin-top:20px;">
+    <p><strong>Silakan lakukan pembayaran:</strong></p>
+    <img src="IMG-20250716-WA0007.jpg" alt="QR Code" style="width:240px; height:240px;">
+    <p><small>Scan untuk membayar melalui QRIS</small></p>
+  </div>
+
+  <div style="text-align:center; margin-top:20px;">
+    <p><em>Jika ada keluhan</em></p>
+    <p><strong>Hubungi Kami:</strong></p>
+    <p>
+      <a href="https://wa.me/62882016389601" target="_blank" style="text-decoration:none; color:#25D366;">
+        📞 WhatsApp: 0882-0163-89601
+      </a><br>
+      <a href="https://www.instagram.com/risol_kuyyy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="text-decoration:none; color:#C13584;">
+        📷 Instagram: @risol_kuyyy
+      </a>
+    </p>
+  </div>
+`;
+
+
+document.getElementById("isiStruk").innerHTML = strukHTML;
+document.getElementById("struk").style.display = 'block';
+document.getElementById("struk").scrollIntoView({ behavior: "smooth" });
+
+      const order = {
+        nama, alamat, total, waktu: new Date().toLocaleString()
+      };
+      const riwayat = JSON.parse(localStorage.getItem("risolkuy_orders") || "[]");
+      riwayat.push(order);
+      localStorage.setItem("risolkuy_orders", JSON.stringify(riwayat));
+    }
+    // Efek hujan risol kecil
+    document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".risol-hujan");
+    for (let i = 0; i < 20; i++) {
+    const img = document.createElement("img");
+    img.src = "https://png.pngtree.com/png-clipart/20211219/original/pngtree-delicious-golden-brown-risoles-png-image_6974117.png";
+    img.style.left = Math.random() * 100 + "vw";
+    img.style.animationDuration = (Math.random() * 5 + 5) + "s";
+    img.style.animationDelay = (Math.random() * 10) + "s";
+    container.appendChild(img);
+  }
+});
+
+      
+  </script>
+
+</body>
+</html>
